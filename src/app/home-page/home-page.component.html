@@ -1,5 +1,19 @@
 <div>
-  Here will be form
+  <mat-form-field>
+    <input matInput [matDatepicker]="picker" placeholder="Choose a date" [(ngModel)]="startDate">
+    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker>
+  </mat-form-field>
+  <mat-form-field>
+      <mat-label>Operator</mat-label>
+      <mat-select [(ngModel)]="selectedOperator">
+        <mat-option *ngFor="let operator of operatorsList" [value]="operator">
+          {{operator}}
+        </mat-option>
+      </mat-select>
+  </mat-form-field>
+  <button mat-raised-button (click)="getDate()">Test data</button>
+  <button mat-raised-button (click)="getData()">Get data</button>
 </div>
 <div>
   Here will be table with data
