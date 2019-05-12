@@ -1,18 +1,35 @@
 <div>
   <mat-form-field>
-    <input matInput [matDatepicker]="picker" placeholder="Choose a date" [(ngModel)]="startDate">
-    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-    <mat-datepicker #picker></mat-datepicker>
+    <input matInput [matDatepicker]="spicker" placeholder="Choose start date" [(ngModel)]="startDate">
+    <mat-datepicker-toggle matSuffix [for]="spicker"></mat-datepicker-toggle>
+    <mat-datepicker #spicker></mat-datepicker>
   </mat-form-field>
+
   <mat-form-field>
-      <mat-label>Operator</mat-label>
-      <mat-select [(ngModel)]="selectedOperator">
-        <mat-option *ngFor="let operator of operatorsList" [value]="operator">
-          {{operator}}
-        </mat-option>
-      </mat-select>
+    <input matInput [matDatepicker]="epicker" placeholder="Choose end date" [(ngModel)]="endDate">
+    <mat-datepicker-toggle matSuffix [for]="epicker"></mat-datepicker-toggle>
+    <mat-datepicker #epicker></mat-datepicker>
   </mat-form-field>
-  <button mat-raised-button (click)="getDate()">Test data</button>
+
+  <mat-form-field>
+    <mat-label>Operator</mat-label>
+    <mat-select [(ngModel)]="selectedOperator">
+      <mat-option *ngFor="let operator of operatorsList" [value]="operator">
+        {{operator}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Call status</mat-label>
+    <mat-select [(ngModel)]="selectedStatus">
+      <mat-option *ngFor="let status of statusList" [value]="status.id">
+        {{status.name}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <button mat-raised-button (click)="testForm()">Test form</button>
   <button mat-raised-button (click)="getData()">Get data</button>
 </div>
 <div>
