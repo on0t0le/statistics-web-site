@@ -15,12 +15,14 @@ import {
   MatNativeDateModule,
   MatButtonModule,
   MatSelectModule
-} from '@angular/material'
+} from '@angular/material';
+import { TestPageComponent } from './test-page/test-page.component'
 
 @NgModule({
   declarations: [
     AppComponent,
-    HomePageComponent
+    HomePageComponent,
+    TestPageComponent
   ],
   imports: [
     BrowserModule,

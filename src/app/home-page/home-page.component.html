@@ -1,14 +1,18 @@
 <div>
-  <mat-form-field color="primary">
-    <input matInput [matDatepicker]="spicker" placeholder="Choose start date" [(ngModel)]="startDate">
-    <mat-datepicker-toggle matSuffix [for]="spicker"></mat-datepicker-toggle>
-    <mat-datepicker #spicker></mat-datepicker>
+
+  <mat-form-field>
+    <mat-label>Start date</mat-label>
+    <input matInput [matDatepickerFilter]="startDateFilter" [(ngModel)]="startDate" [matDatepicker]="picker1" readonly
+      (click)="picker1.open()">
+    <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+    <mat-datepicker #picker1></mat-datepicker>
   </mat-form-field>
 
-  <mat-form-field color="warn">
-    <input matInput [matDatepicker]="epicker" placeholder="Choose end date" [(ngModel)]="endDate">
-    <mat-datepicker-toggle matSuffix [for]="epicker"></mat-datepicker-toggle>
-    <mat-datepicker #epicker></mat-datepicker>
+  <mat-form-field>
+    <mat-label>End date</mat-label>
+    <input matInput [matDatepickerFilter]="endDateFilter" [(ngModel)]="endDate" [matDatepicker]="picker2" readonly (click)="picker2.open()">
+    <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+    <mat-datepicker #picker2></mat-datepicker>
   </mat-form-field>
 
   <mat-form-field>
