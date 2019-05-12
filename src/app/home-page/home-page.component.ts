@@ -25,10 +25,10 @@ export class HomePageComponent {
   }
 
   getData(){
-    let _startDate = this.datePipe.transform(this.startDate,'yyyy-MM-dd')
-    this.statService.getStatistics(_startDate,this.selectedOperator).subscribe(data =>{
-      console.log('Get this data: ',data);
-      
+    let _startDate = this.datePipe.transform(this.startDate,'yyyy-MM-dd');
+    let _endDate = this.datePipe.transform(this.endDate,'yyyy-MM-dd')
+    this.statService.getStatistics(_startDate,_endDate,this.selectedOperator,this.selectedStatus).subscribe(data =>{
+      console.log('Get this data: ',data);      
     },
     err =>{
       console.error('Houston, we have a problem: ',err);      

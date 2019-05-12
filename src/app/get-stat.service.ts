@@ -9,13 +9,13 @@ export class GetStatService {
   BASE_URL = 'http://192.168.88.100:3000'
   constructor(private http: HttpClient) { }
 
-  public getStatistics(_startDate: string,_operator: string){
+  public getStatistics(_startDate: string, _endDate: string, _operator: string, _status: string) {
     let body = {
-      startDate:_startDate,
-	    endDate:"2019-05-10",
-	    operator:_operator,
-	    status:"BUSY"
+      startDate: _startDate,
+      endDate: _endDate,
+      operator: _operator,
+      status: _status
     }
-    return this.http.post(this.BASE_URL+'/api/calls',body);
+    return this.http.post(this.BASE_URL + '/api/calls', body);
   }
 }
