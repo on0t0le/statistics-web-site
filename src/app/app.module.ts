@@ -14,7 +14,8 @@ import {
   MatInputModule,
   MatNativeDateModule,
   MatButtonModule,
-  MatSelectModule
+  MatSelectModule,
+  MatTableModule
 } from '@angular/material';
 import { TestPageComponent } from './test-page/test-page.component'
 
@@ -35,7 +36,8 @@ import { TestPageComponent } from './test-page/test-page.component'
     FormsModule,
     MatSelectModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    MatTableModule
   ],
   providers: [DatePipe],
   bootstrap: [AppComponent]

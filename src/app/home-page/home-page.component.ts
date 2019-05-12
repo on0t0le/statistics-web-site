@@ -11,6 +11,8 @@ export class HomePageComponent {
 
   constructor(private datePipe: DatePipe, private statService: GetStatService) { }
 
+  math = Math;
+
   startDate: Date = new Date(Date.now());
   endDate: Date = new Date(Date.now());
 
@@ -19,6 +21,9 @@ export class HomePageComponent {
 
   selectedStatus: string = 'all';
   statusList = statuses;
+
+  statisticsData: any;
+  displayedColumns: string[] = ['start','src','dstchannel','disposition','diff'];
 
   testForm() {
     console.log('You choose: start date ' + this.startDate + ', end date ' + this.endDate + ', operator ' + this.selectedOperator + ', status ' + this.selectedStatus);
@@ -29,6 +34,7 @@ export class HomePageComponent {
     let _endDate = this.datePipe.transform(this.endDate, 'yyyy-MM-dd')
     this.statService.getStatistics(_startDate, _endDate, this.selectedOperator, this.selectedStatus).subscribe(data => {
       console.log('Get this data: ', data);
+      this.statisticsData = data;
     },
       err => {
         console.error('Houston, we have a problem: ', err);

@@ -10,7 +10,8 @@
 
   <mat-form-field>
     <mat-label>End date</mat-label>
-    <input matInput [matDatepickerFilter]="endDateFilter" [(ngModel)]="endDate" [matDatepicker]="picker2" readonly (click)="picker2.open()">
+    <input matInput [matDatepickerFilter]="endDateFilter" [(ngModel)]="endDate" [matDatepicker]="picker2" readonly
+      (click)="picker2.open()">
     <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
     <mat-datepicker #picker2></mat-datepicker>
   </mat-form-field>
@@ -37,5 +38,40 @@
   <button mat-raised-button (click)="getData()">Get data</button>
 </div>
 <div>
-  Here will be table with data
+  <mat-table [dataSource]="statisticsData" class="mat-elevation-z8">
+
+    <!-- Date Column -->
+    <ng-container matColumnDef="start">
+      <mat-header-cell *matHeaderCellDef> Date </mat-header-cell>
+      <mat-cell *matCellDef="let call"> {{call.start | date:'EEE dd/LL HH:mm:ss':'GMT'}} </mat-cell>
+    </ng-container>
+
+    <!-- Source Column -->
+    <ng-container matColumnDef="src">
+      <mat-header-cell *matHeaderCellDef> Source </mat-header-cell>
+      <mat-cell *matCellDef="let call"> {{call.src}} </mat-cell>
+    </ng-container>
+
+    <!-- Destination Column -->
+    <ng-container matColumnDef="dstchannel">
+      <mat-header-cell *matHeaderCellDef> Operator </mat-header-cell>
+      <mat-cell *matCellDef="let call"> {{call.dstchannel}} </mat-cell>
+    </ng-container>
+
+    <!-- Call status Column -->
+    <ng-container matColumnDef="disposition">
+      <mat-header-cell *matHeaderCellDef> Call status </mat-header-cell>
+      <mat-cell *matCellDef="let call">{{ call.disposition }} </mat-cell>
+    </ng-container>
+
+    <!-- Diff Column -->
+    <ng-container matColumnDef="diff">
+      <mat-header-cell *matHeaderCellDef> Call duration </mat-header-cell>
+      <mat-cell *matCellDef="let call">{{ math.floor(call.diff / 60) }}: {{ call.diff % 60 | number:'2.0-0' }}
+      </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+  </mat-table>
 </div>
