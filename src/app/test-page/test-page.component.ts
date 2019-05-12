@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { GetStatService } from '../get-stat.service';
 
 @Component({
   selector: 'app-test-page',
@@ -10,9 +11,23 @@ export class TestPageComponent implements OnInit {
   selectedStartDate: Date = new Date(Date.now());
   selectedEndDate: Date = new Date(Date.now());
 
-  constructor() { }
+  constructor(private callsService: GetStatService) { }
 
   ngOnInit() {
+  }
+
+  getCalls(){
+    let sd = '2019-05-12'
+    let ed = '2019-05-12'
+    let op = '1250'
+    let st = 'BUSY'
+
+    this.callsService.getStatistics(sd,ed,op,st).subscribe((data: any) =>{      
+      console.log(data);      
+    },
+    err =>{
+      console.error(err);
+    })
   }
 
   startFilter = (d: Date): boolean => {
