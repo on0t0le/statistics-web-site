@@ -15,7 +15,8 @@ import {
   MatNativeDateModule,
   MatButtonModule,
   MatSelectModule,
-  MatTableModule
+  MatTableModule,
+  MatPaginatorModule
 } from '@angular/material';
 import { TestPageComponent } from './test-page/test-page.component'
 
@@ -37,7 +38,8 @@ import { TestPageComponent } from './test-page/test-page.component'
     MatSelectModule,
     ReactiveFormsModule,
     HttpClientModule,
-    MatTableModule
+    MatTableModule,
+    MatPaginatorModule
   ],
   providers: [DatePipe],
   bootstrap: [AppComponent]

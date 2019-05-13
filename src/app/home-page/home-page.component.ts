@@ -1,15 +1,15 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild, OnInit } from '@angular/core';
 import { DatePipe } from '@angular/common';
 import { GetStatService } from '../get-stat.service';
+import { MatTableDataSource, MatPaginator } from '@angular/material';
 
 @Component({
   selector: 'app-home-page',
   templateUrl: './home-page.component.html',
   styleUrls: ['./home-page.component.css']
 })
-export class HomePageComponent {
+export class HomePageComponent implements OnInit {
 
-  constructor(private datePipe: DatePipe, private statService: GetStatService) { }
 
   math = Math;
 
@@ -22,8 +22,21 @@ export class HomePageComponent {
   selectedStatus: string = 'all';
   statusList: Status[] = statuses;
 
-  statisticsData: any;
+  //statisticsData: any;
+  statisticsDataSource: any;
+  resultsLength: number;
+  maxPageAll: number = 20;
+
   displayedColumns: string[] = ['start', 'src', 'dstchannel', 'disposition', 'diff'];
+
+
+  constructor(private datePipe: DatePipe, private statService: GetStatService) { }
+
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+
+  ngOnInit() {
+  }
+
 
   testForm() {
     console.log('You choose: start date ' + this.startDate + ', end date ' + this.endDate + ', operator ' + this.selectedOperator + ', status ' + this.selectedStatus);
@@ -32,9 +45,12 @@ export class HomePageComponent {
   getData() {
     let _startDate = this.datePipe.transform(this.startDate, 'yyyy-MM-dd');
     let _endDate = this.datePipe.transform(this.endDate, 'yyyy-MM-dd')
-    this.statService.getStatistics(_startDate, _endDate, this.selectedOperator, this.selectedStatus).subscribe(data => {
+    this.statService.getStatistics(_startDate, _endDate, this.selectedOperator, this.selectedStatus).subscribe((data: any) => {
       console.log('Get this data: ', data);
-      this.statisticsData = data;
+      //this.statisticsDataSource = data;
+      this.resultsLength = data.length;
+      this.statisticsDataSource = new MatTableDataSource(data);
+      this.statisticsDataSource.paginator = this.paginator;
     },
       err => {
         console.error('Houston, we have a problem: ', err);
@@ -55,6 +71,15 @@ export class HomePageComponent {
       return false;
     }
     return true;
+  }
+
+
+
+  getPageSizeOptions(): number[] {
+    if (this.resultsLength > this.maxPageAll)
+      return [5, 10, 20, this.resultsLength];
+    else
+      return [5, 10, this.maxPageAll];
   }
 }
 
