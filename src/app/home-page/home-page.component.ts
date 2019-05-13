@@ -17,13 +17,13 @@ export class HomePageComponent {
   endDate: Date = new Date(Date.now());
 
   selectedOperator: string = 'all';
-  operatorsList: string[] = ['all', '1206', '1207', '1238'];
+  operatorsList: Operator[] = operators;
 
   selectedStatus: string = 'all';
-  statusList = statuses;
+  statusList: Status[] = statuses;
 
   statisticsData: any;
-  displayedColumns: string[] = ['start','src','dstchannel','disposition','diff'];
+  displayedColumns: string[] = ['start', 'src', 'dstchannel', 'disposition', 'diff'];
 
   testForm() {
     console.log('You choose: start date ' + this.startDate + ', end date ' + this.endDate + ', operator ' + this.selectedOperator + ', status ' + this.selectedStatus);
@@ -59,9 +59,30 @@ export class HomePageComponent {
 }
 
 
-const statuses = [
+const statuses: Status[] = [
   { id: 'all', name: 'Everything' },
   { id: 'ANSWERED', name: 'Answered' },
   { id: 'BUSY', name: 'Busy' },
   { id: 'NO ANSWER', name: 'Not answered' }
 ]
+
+const operators: Operator[] = [
+  { name: 'All', number: 'all' },
+  { name: 'Ira Novak', number: '1204' },
+  { name: 'Alexander Bulitko', number: '1206' },
+  { name: 'Liuda Savisko', number: '1207' },
+  { name: 'Yana Antonenko', number: '1238' },
+  { name: 'Natalia Chychai', number: '1239' },
+  { name: 'Oksana Dromashko', number: '1246' },
+  { name: 'Andrey Lukomskiy', number: '1250' }
+]
+
+interface Status {
+  id: string,
+  name: string
+}
+
+interface Operator {
+  name: string,
+  number: string
+}
