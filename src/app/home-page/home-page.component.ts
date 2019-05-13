@@ -75,13 +75,19 @@ export class HomePageComponent implements OnInit {
     return true;
   }
 
-
-
   getPageSizeOptions(): number[] {
     if (this.resultsLength > this.maxPageAll)
       return [5, 10, 20, this.resultsLength];
     else
       return [5, 10, this.maxPageAll];
+  }
+
+  applyFilter(filterValue: string) {
+    this.statisticsDataSource.filter = filterValue.trim().toLowerCase();
+
+    if (this.statisticsDataSource.paginator) {
+      this.statisticsDataSource.paginator.firstPage();
+    }
   }
 }
 

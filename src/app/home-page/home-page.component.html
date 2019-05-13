@@ -37,6 +37,9 @@
   <button mat-raised-button (click)="getData()">Show statistics</button>
 </div>
 <div>
+  <mat-form-field>
+    <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+  </mat-form-field>
   <mat-table [dataSource]="statisticsDataSource" class="mat-elevation-z8" matSort>
 
     <!-- Date Column -->
@@ -73,5 +76,6 @@
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
     <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
   </mat-table>
-  <mat-paginator [length]="resultsLength" [pageSize]="10" [pageSizeOptions]="getPageSizeOptions()" showFirstLastButtons></mat-paginator>
+  <mat-paginator [length]="resultsLength" [pageSize]="10" [pageSizeOptions]="getPageSizeOptions()" showFirstLastButtons>
+  </mat-paginator>
 </div>
