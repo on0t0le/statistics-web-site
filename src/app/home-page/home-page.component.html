@@ -33,11 +33,11 @@
     </mat-select>
   </mat-form-field>
 
-  <button mat-raised-button (click)="testForm()">Test form</button>
-  <button mat-raised-button (click)="getData()">Get data</button>
+  <!-- <button mat-raised-button (click)="testForm()">Test form</button> -->
+  <button mat-raised-button (click)="getData()">Show statistics</button>
 </div>
 <div>
-  <mat-table [dataSource]="statisticsDataSource" class="mat-elevation-z8">
+  <mat-table [dataSource]="statisticsDataSource" class="mat-elevation-z8" matSort>
 
     <!-- Date Column -->
     <ng-container matColumnDef="start">
@@ -53,13 +53,13 @@
 
     <!-- Destination Column -->
     <ng-container matColumnDef="dstchannel">
-      <mat-header-cell *matHeaderCellDef> Operator </mat-header-cell>
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Operator </mat-header-cell>
       <mat-cell *matCellDef="let call"> {{call.dstchannel}} </mat-cell>
     </ng-container>
 
     <!-- Call status Column -->
     <ng-container matColumnDef="disposition">
-      <mat-header-cell *matHeaderCellDef> Call status </mat-header-cell>
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Call status </mat-header-cell>
       <mat-cell *matCellDef="let call">{{ call.disposition }} </mat-cell>
     </ng-container>
 

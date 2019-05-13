@@ -1,7 +1,7 @@
 import { Component, ViewChild, OnInit } from '@angular/core';
 import { DatePipe } from '@angular/common';
 import { GetStatService } from '../get-stat.service';
-import { MatTableDataSource, MatPaginator } from '@angular/material';
+import { MatTableDataSource, MatPaginator, MatSort } from '@angular/material';
 
 @Component({
   selector: 'app-home-page',
@@ -33,6 +33,7 @@ export class HomePageComponent implements OnInit {
   constructor(private datePipe: DatePipe, private statService: GetStatService) { }
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatSort) sort: MatSort;
 
   ngOnInit() {
   }
@@ -51,6 +52,7 @@ export class HomePageComponent implements OnInit {
       this.resultsLength = data.length;
       this.statisticsDataSource = new MatTableDataSource(data);
       this.statisticsDataSource.paginator = this.paginator;
+      this.statisticsDataSource.sort = this.sort;
     },
       err => {
         console.error('Houston, we have a problem: ', err);
