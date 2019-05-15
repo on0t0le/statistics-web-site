@@ -2,5 +2,37 @@
   <p><button (click)="getCalls()">Set min</button></p>
 </div>
 <div>
-  This page is only for test purpose
+  <mat-table [dataSource]="statisticsDataSource" class="mat-elevation-z8" multiTemplateDataRows>
+
+
+    <!-- Source Column -->
+    <ng-container matColumnDef="src">
+      <mat-header-cell *matHeaderCellDef> Source </mat-header-cell>
+      <mat-cell *matCellDef="let call"> {{call.src}} </mat-cell>
+    </ng-container>
+
+    <!-- Destination Column -->
+    <ng-container matColumnDef="dstchannel">
+      <mat-header-cell *matHeaderCellDef> Operator </mat-header-cell>
+      <mat-cell *matCellDef="let call"> {{call.dstchannel}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="expandedDetail">
+      <mat-cell *matCellDef="let element">
+        <div [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'">
+          <div>
+            {{element.start}} {{element.start}} {{element.start}} {{element.start}} {{element.start}}
+          </div>
+        </div>
+      </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let element; columns: displayedColumns;"
+      [class.example-expanded-row]="expandedElement === element"
+      (click)="expandedElement = expandedElement === element ? null : element"></mat-row>
+    <mat-row *matRowDef="let row; columns: ['expandedDetail']" class="example-detail-row">
+    </mat-row>
+  </mat-table>
+
 </div>
