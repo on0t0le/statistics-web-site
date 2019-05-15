@@ -19,7 +19,8 @@ import {
   MatPaginatorModule,
   MatSortModule
 } from '@angular/material';
-import { TestPageComponent } from './test-page/test-page.component'
+import { TestPageComponent } from './test-page/test-page.component';
+import { AppRoutingModule } from './app-routing.module'
 
 @NgModule({
   declarations: [
@@ -41,7 +42,8 @@ import { TestPageComponent } from './test-page/test-page.component'
     HttpClientModule,
     MatTableModule,
     MatPaginatorModule,
-    MatSortModule
+    MatSortModule,
+    AppRoutingModule
   ],
   providers: [DatePipe],
   bootstrap: [AppComponent]
