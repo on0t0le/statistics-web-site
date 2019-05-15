@@ -6,7 +6,7 @@ import { HttpClient } from '@angular/common/http';
 })
 export class GetStatService {
 
-  BASE_URL = 'http://192.168.1.100:3000'
+  BASE_URL = 'http://newstatistics.intra'
   constructor(private http: HttpClient) { }
 
   public getStatistics(_startDate: string, _endDate: string, _operator: string, _status: string) {
