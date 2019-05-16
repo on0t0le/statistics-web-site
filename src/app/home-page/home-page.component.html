@@ -40,13 +40,8 @@
   <mat-form-field>
     <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
   </mat-form-field>
-  <mat-table [dataSource]="statisticsDataSource" class="mat-elevation-z8" matSort>
+  <mat-table [dataSource]="statisticsDataSource" class="mat-elevation-z8" matSort multiTemplateDataRows>
 
-    <!-- Date Column -->
-    <ng-container matColumnDef="start">
-      <mat-header-cell *matHeaderCellDef> Date </mat-header-cell>
-      <mat-cell *matCellDef="let call"> {{call.start | date:'EEE dd/LL HH:mm:ss':'GMT'}} </mat-cell>
-    </ng-container>
 
     <!-- Source Column -->
     <ng-container matColumnDef="src">
@@ -66,15 +61,39 @@
       <mat-cell *matCellDef="let call">{{ call.disposition }} </mat-cell>
     </ng-container>
 
-    <!-- Diff Column -->
-    <ng-container matColumnDef="diff">
-      <mat-header-cell *matHeaderCellDef> Call duration </mat-header-cell>
-      <mat-cell *matCellDef="let call">{{ call.diff | secondsTransformer }}
+    <!-- Details Row -->
+
+    <ng-container matColumnDef="expandedDetail">
+      <mat-cell *matCellDef="let element;">
+        <div [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'">
+          <table class="details-table">
+            <tr>
+              <td>
+                <div>
+                  Incoming call was recieved at {{element.start}}
+                  <p>Call time is: {{element.diff | secondsTransformer}}</p>
+                </div>
+              </td>
+              <td>
+                <div>
+                  <p>Tap play to listen:</p>
+                  <audio controls preload="none">
+                    Tap play to listen:
+                    <source [src]="element.userfield" type="audio/wav">
+                  </audio>
+                </div>
+              </td>
+
+            </tr>
+          </table>
+        </div>
       </mat-cell>
     </ng-container>
 
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    <mat-row *matRowDef="let element; columns: displayedColumns;" [class.example-expanded-row]="expandedElement === element"
+      (click)="expandedElement = expandedElement === element ? null : element"></mat-row>
+    <mat-row *matRowDef="let row; columns: ['expandedDetail']" class="example-detail-row"></mat-row>
   </mat-table>
   <mat-paginator [length]="resultsLength" [pageSize]="10" [pageSizeOptions]="getPageSizeOptions()" showFirstLastButtons>
   </mat-paginator>

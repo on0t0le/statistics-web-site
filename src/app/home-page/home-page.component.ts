@@ -2,16 +2,21 @@ import { Component, ViewChild, OnInit } from '@angular/core';
 import { DatePipe } from '@angular/common';
 import { GetStatService } from '../get-stat.service';
 import { MatTableDataSource, MatPaginator, MatSort } from '@angular/material';
+import { trigger, state, style, transition, animate } from '@angular/animations';
 
 @Component({
   selector: 'app-home-page',
   templateUrl: './home-page.component.html',
-  styleUrls: ['./home-page.component.css']
+  styleUrls: ['./home-page.component.css'],
+  animations: [
+    trigger('detailExpand', [
+      state('collapsed', style({ height: '0px', minHeight: '0', display: 'none' })),
+      state('expanded', style({ height: '*' })),
+      transition('expanded <=> collapsed', animate('225ms cubic-bezier(0.4, 0.0, 0.2, 1)')),
+    ]),
+  ]
 })
 export class HomePageComponent implements OnInit {
-
-
-  math = Math;
 
   startDate: Date = new Date(Date.now());
   endDate: Date = new Date(Date.now());
@@ -27,7 +32,8 @@ export class HomePageComponent implements OnInit {
   resultsLength: number;
   maxPageAll: number = 20;
 
-  displayedColumns: string[] = ['start', 'src', 'dstchannel', 'disposition', 'diff'];
+  displayedColumns: string[] = ['src', 'dstchannel', 'disposition'];
+  expandedElement: any | null;
 
 
   constructor(private datePipe: DatePipe, private statService: GetStatService) { }

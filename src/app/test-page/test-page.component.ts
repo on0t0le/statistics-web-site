@@ -29,10 +29,10 @@ export class TestPageComponent implements OnInit {
   }
 
   getCalls() {
-    let sd = '2019-05-12'
-    let ed = '2019-05-12'
-    let op = '1250'
-    let st = 'ANSWERED'
+    let sd = '2019-05-14'
+    let ed = '2019-05-14'
+    let op = 'all'
+    let st = 'all'
 
     this.callsService.getStatistics(sd, ed, op, st).subscribe((data: any) => {
       console.log(data);

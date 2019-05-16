@@ -26,15 +26,26 @@
     <ng-container matColumnDef="expandedDetail">
       <mat-cell *matCellDef="let element;">
         <div [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'">
-          <div>
-            Incoming call was recieved at {{element.start}}
-            <p *ngIf="(element.diff / 60)">Call time is: {{element.diff | secondsTransformer}}</p>
-          </div>
-          <div>
-            <audio controls>
-              Tap play to listen:
-            </audio>
-          </div>
+          <table class="details-table">
+            <tr>
+              <td>
+                <div>
+                  Incoming call was recieved at {{element.start}}
+                  <p>Call time is: {{element.diff | secondsTransformer}}</p>
+                </div>
+              </td>
+              <td>
+                <div>
+                  <p>Tap play to listen:</p>
+                  <audio controls preload="none">
+                    Tap play to listen:
+                    <source src="../../assets/sounds/Cave_Johnson_fifties_intro01.wav" type="audio/wav">
+                  </audio>
+                </div>
+              </td>
+
+            </tr>
+          </table>
         </div>
       </mat-cell>
     </ng-container>
