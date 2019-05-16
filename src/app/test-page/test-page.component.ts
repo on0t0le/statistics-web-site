@@ -8,8 +8,8 @@ import { trigger, state, style, transition, animate } from '@angular/animations'
   styleUrls: ['./test-page.component.css'],
   animations: [
     trigger('detailExpand', [
-      state('collapsed', style({height: '0px', minHeight: '0', display: 'none'})),
-      state('expanded', style({height: '*'})),
+      state('collapsed', style({ height: '0px', minHeight: '0', display: 'none' })),
+      state('expanded', style({ height: '*' })),
       transition('expanded <=> collapsed', animate('225ms cubic-bezier(0.4, 0.0, 0.2, 1)')),
     ]),
   ]
@@ -17,10 +17,11 @@ import { trigger, state, style, transition, animate } from '@angular/animations'
 export class TestPageComponent implements OnInit {
   statisticsDataSource: any;
 
-  //Availible: start, disposition, diff, userfield
-  displayedColumns = ['src','dstchannel'];
+  displayedColumns = ['src', 'dstchannel', 'disposition'];
+  //expandedDisplayedRow = ['start', 'disposition', 'diff', 'userfield'];
 
   expandedElement: any | null;
+  math: Math;
 
   constructor(private callsService: GetStatService) { }
 
@@ -31,7 +32,7 @@ export class TestPageComponent implements OnInit {
     let sd = '2019-05-12'
     let ed = '2019-05-12'
     let op = '1250'
-    let st = 'BUSY'
+    let st = 'ANSWERED'
 
     this.callsService.getStatistics(sd, ed, op, st).subscribe((data: any) => {
       console.log(data);

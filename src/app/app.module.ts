@@ -20,13 +20,15 @@ import {
   MatSortModule
 } from '@angular/material';
 import { TestPageComponent } from './test-page/test-page.component';
-import { AppRoutingModule } from './app-routing.module'
+import { AppRoutingModule } from './app-routing.module';
+import { SecondsTransformerPipe } from './seconds-transformer.pipe';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomePageComponent,
-    TestPageComponent
+    TestPageComponent,
+    SecondsTransformerPipe
   ],
   imports: [
     BrowserModule,

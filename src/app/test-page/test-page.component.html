@@ -1,8 +1,8 @@
 <div>
-  <p><button (click)="getCalls()">Set min</button></p>
+  <p><button mat-raised-button (click)="getCalls()">Fetch data</button></p>
 </div>
 <div>
-  <mat-table [dataSource]="statisticsDataSource" class="mat-elevation-z8" multiTemplateDataRows>
+  <mat-table [dataSource]="statisticsDataSource" class="mat-elevation-z8" multiTemplateDataRows matSort>
 
 
     <!-- Source Column -->
@@ -13,15 +13,27 @@
 
     <!-- Destination Column -->
     <ng-container matColumnDef="dstchannel">
-      <mat-header-cell *matHeaderCellDef> Operator </mat-header-cell>
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Operator </mat-header-cell>
       <mat-cell *matCellDef="let call"> {{call.dstchannel}} </mat-cell>
     </ng-container>
 
+    <!-- Call status Column -->
+    <ng-container matColumnDef="disposition">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Call status </mat-header-cell>
+      <mat-cell *matCellDef="let call">{{ call.disposition }} </mat-cell>
+    </ng-container>
+
     <ng-container matColumnDef="expandedDetail">
-      <mat-cell *matCellDef="let element">
+      <mat-cell *matCellDef="let element;">
         <div [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'">
           <div>
-            {{element.start}} {{element.start}} {{element.start}} {{element.start}} {{element.start}}
+            Incoming call was recieved at {{element.start}}
+            <p *ngIf="(element.diff / 60)">Call time is: {{element.diff | secondsTransformer}}</p>
+          </div>
+          <div>
+            <audio controls>
+              Tap play to listen:
+            </audio>
           </div>
         </div>
       </mat-cell>

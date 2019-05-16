@@ -69,7 +69,7 @@
     <!-- Diff Column -->
     <ng-container matColumnDef="diff">
       <mat-header-cell *matHeaderCellDef> Call duration </mat-header-cell>
-      <mat-cell *matCellDef="let call">{{ math.floor(call.diff / 60) }}: {{ call.diff % 60 | number:'2.0-0' }}
+      <mat-cell *matCellDef="let call">{{ call.diff | secondsTransformer }}
       </mat-cell>
     </ng-container>
 
