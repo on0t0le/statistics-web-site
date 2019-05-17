@@ -70,12 +70,12 @@
             <tr>
               <td>
                 <div>
-                  Incoming call was recieved at {{element.start}}
+                  Incoming call was recieved on {{element.start | date:'dd MMMM yyyy EEEE '}} at {{ element.start | date:'HH:mm:SS':'GMT' }}
                   <p>Call time is: {{element.diff | secondsTransformer}}</p>
                 </div>
               </td>
               <td>
-                <div>
+                <div *ngIf="element.disposition=='ANSWERED'">
                   <p>Tap play to listen:</p>
                   <audio controls preload="none">
                     Tap play to listen:
